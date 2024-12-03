@@ -24,7 +24,9 @@ export default function Navbar({
 	return (
 		<>
 			<div className="min-h-full">
-				<Disclosure as="nav" className="bg-gray-800">
+				<Disclosure
+					as="nav"
+					className="bg-gray-800/80 sticky top-0 backdrop-blur-md z-[1]">
 					<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 						<div className="flex h-16 items-center justify-between">
 							<div
@@ -102,10 +104,11 @@ export default function Navbar({
 
 				<main>
 					<div className="bg-white shadow">
-						<div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-							<h1 className="text-3xl font-bold tracking-tight text-gray-900">
-								Dashboard
-							</h1>
+						<div
+							className="mx-auto max-w-7xl md:px-4 px-1 py-6 sm:px-6 lg:px-8"
+							style={{
+								minHeight: "90dvh",
+							}}>
 							{children}
 						</div>
 					</div>

@@ -19,7 +19,7 @@ const people = [
 	},
 ];
 
-export default function Example() {
+const Example: React.FC = () => {
 	return (
 		<>
 			<div className="px-12">Somer</div>
@@ -36,4 +36,5 @@ export default function Example() {
 			</ul>
 		</>
 	);
-}
+};
+export default Example;

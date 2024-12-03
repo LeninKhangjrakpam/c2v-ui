@@ -1,3 +1,9 @@
+// TODO: Add suspense to file dropper
+// TODO: Add tailwind loading to wait for fetch request from useFetch hooks
+// TODO: Reduce padding for mobile view
+// TODO: File Dropper Add Button
+// DiscusX, buy me a coffee
+
 import { FC, useState } from "react";
 import FileInput from "../components/fileInput";
 import useFilesInput from "../hooks/useFileInput";
@@ -7,19 +13,18 @@ import CAccordion from "../components/cAccrodion";
 import GridSortableImg from "../components/grid";
 import { DialogueData } from "../components/inputDataType";
 
-const About: FC = () => {
+const Home: FC = () => {
 	const [inpFiles, setInpFiles, inpFilesHandlers] = useFilesInput();
 	const [panels, setPanels, panelsHandler] = useFilesInput();
 	const [characters, setCharacters, charactersHandler] = useFilesInput();
 	const [dialogues, setDialogues, dialoguesHandler] = useState<DialogueData[]>(
 		[],
 	);
-
 	return (
 		<div className="relative">
-			<h1 className="text-black">About Page</h1>
-			<h1 className="text-black">Count: {inpFiles.length}</h1>
-
+			<h1 className="text-gray-600 font-roboto pt-1 pb-8 text-2xl font-extrabold">
+				Comic to Video Generation
+			</h1>
 			{inpFiles.length === 0 && <FileInput handlers={inpFilesHandlers} />}
 
 			{inpFiles.length !== 0 && panels.length === 0 && (
@@ -116,4 +121,5 @@ const About: FC = () => {
 		</div>
 	);
 };
-export default About;
+
+export default Home;
