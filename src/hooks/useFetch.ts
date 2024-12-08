@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-interface useFetchResult {
-	res: any;
+interface useFetchResult<T> {
+	res: T | undefined;
 	isLoading: boolean;
 	error: string | null;
 }
 
-const useFetch = (url: string, options: any): useFetchResult => {
-	const [res, setRes] = useState<any>();
+const useFetch = <T>(url: string, options: RequestInit): useFetchResult<T> => {
+	const [res, setRes] = useState<T | undefined>();
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [error, setError] = useState<string | null>(null);
 
@@ -18,8 +18,10 @@ const useFetch = (url: string, options: any): useFetchResult => {
 				const r = await fetch(url, options);
 				const d = await r.json();
 				setRes(d);
-			} catch (err: any) {
-				setError(err.message);
+			} catch (err) {
+				console.error(err);
+				if (err instanceof Error) setError(err.message);
+				else setError("an unknown error occur");
 			} finally {
 				setIsLoading(false);
 			}

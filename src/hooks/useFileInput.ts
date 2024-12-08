@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { InputData } from "../components/inputDataType";
+import { InputData } from "../components/inputData.type";
+import { getUUID } from "../utils/util";
 
 export interface FileInputHandler {
 	addInputDatas: (file: InputData | InputData[]) => InputData[];
@@ -24,7 +25,7 @@ const useFilesInput = (): [
 			// file: fI
 			name: f.name,
 			url: URL.createObjectURL(f),
-			id: crypto.randomUUID(),
+			id: getUUID(),
 			type: f.type,
 			size: f.size,
 			lastModified: new Date(f.lastModified),

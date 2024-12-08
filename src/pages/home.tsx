@@ -9,17 +9,16 @@ import FileInput from "../components/fileInput";
 import useFilesInput from "../hooks/useFileInput";
 import ScrollToTopBtn from "../components/scrollToTopBtn";
 import InputImagePreview from "../components/inputImgPreview";
-import CAccordion from "../components/cAccrodion";
+import CAccordion from "../components/Accordion/cAccrodion";
 import GridSortableImg from "../components/grid";
-import { DialogueData } from "../components/inputDataType";
+import { DialogueData } from "../components/inputData.type";
 
 const Home: FC = () => {
 	const [inpFiles, setInpFiles, inpFilesHandlers] = useFilesInput();
 	const [panels, setPanels, panelsHandler] = useFilesInput();
 	const [characters, setCharacters, charactersHandler] = useFilesInput();
-	const [dialogues, setDialogues, dialoguesHandler] = useState<DialogueData[]>(
-		[],
-	);
+	const [dialogues, setDialogues] = useState<DialogueData[]>([]);
+
 	return (
 		<div className="relative">
 			<h1 className="text-gray-600 font-roboto pt-1 pb-8 text-2xl font-extrabold">

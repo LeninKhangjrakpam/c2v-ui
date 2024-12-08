@@ -1,7 +1,8 @@
 import { XMarkIcon, PlusIcon } from "@heroicons/react/24/outline";
 import GridSortableImg, { GridSortableProps } from "./grid";
-import { InputData } from "./inputDataType";
-import { useRef } from "react";
+import { InputData } from "./inputData.type";
+import { useContext, useRef } from "react";
+import ToastsContext from "../hooks/createToastContext";
 
 interface InputImagePreviewProps extends GridSortableProps<InputData> {
 	resetFiles: () => void;
@@ -12,7 +13,7 @@ interface InputImagePreviewProps extends GridSortableProps<InputData> {
 
 const InputImagePreview = (props: InputImagePreviewProps) => {
 	const addFilesInputRef = useRef<HTMLInputElement>(null);
-
+	const createToast = useContext(ToastsContext);
 	return (
 		<>
 			<div className="relative w-full h-fit">
@@ -50,7 +51,12 @@ const InputImagePreview = (props: InputImagePreviewProps) => {
 					accept="image/*"
 					className="hidden"
 					onChange={(e) => {
-						props.addFiles(props.FileInputFileSrc(e));
+						const len = props.addFiles(props.FileInputFileSrc(e)).length;
+						if (createToast)
+							createToast({
+								type: "success",
+								children: <div>Successfully Uploaded {len} files</div>,
+							});
 					}}
 				/>
 			</div>

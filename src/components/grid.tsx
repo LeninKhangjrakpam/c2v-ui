@@ -4,16 +4,16 @@
 // Create ReadableSize Function
 // Move some function from useFileInput hooks to utils
 
+import { useReducer } from "react";
 import { ReactSortable } from "react-sortablejs";
-import { InputData, SortableI } from "./inputDataType";
 
+import { InputData, SortableI } from "./inputData.type";
 import CardAction from "./cardAction";
 import { MaxFileNameLen } from "../utils/constants";
-import { useReducer } from "react";
 import modalImgReducer, {
 	ModalImgDataActionKind,
 } from "../hooks/modalImgDataReducer";
-import ModalImg from "./modal";
+import ModalImg from "./Modal/modalImg";
 import { capIndx } from "../utils/util";
 
 interface GridContainerProps<T extends SortableI> {

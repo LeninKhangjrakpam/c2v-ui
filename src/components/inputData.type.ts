@@ -16,9 +16,3 @@ export interface DialogueData extends SortableI {
 	id: number;
 	text: string;
 }
-
-export interface ModalImgData {
-	vizState: boolean;
-	data: undefined | InputData;
-	indx: number;
-}

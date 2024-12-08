@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { InputData } from "./inputDataType";
+import { InputData } from "../inputData.type";
 import Accordion from "./accordion";
 import { XMarkIcon, PlusIcon } from "@heroicons/react/24/outline";
 

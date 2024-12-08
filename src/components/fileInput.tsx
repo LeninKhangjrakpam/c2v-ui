@@ -1,7 +1,9 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { FileInputHandler } from "../hooks/useFileInput";
 
 import { PlusIcon, FolderPlusIcon } from "@heroicons/react/24/outline";
+import ToastsContext from "../hooks/createToastContext";
+import { ToastTimer } from "../utils/constants";
 
 interface FileInputProps {
 	handlers: FileInputHandler;
@@ -12,6 +14,8 @@ const FileInput = ({ handlers }: FileInputProps) => {
 
 	const fileInputRef = useRef<HTMLInputElement>(null);
 
+	const createToast = useContext(ToastsContext);
+
 	return (
 		<div
 			onDrop={(e) => {
@@ -19,6 +23,12 @@ const FileInput = ({ handlers }: FileInputProps) => {
 				const res = addFiles(fs);
 				console.log(`${res.length} files dropped`);
 				// TODO: notify the user of dropped files count using a `toast`
+				if (createToast)
+					createToast({
+						type: "success",
+						timer: ToastTimer,
+						children: <div>Successfully Uploaded {res.length} files</div>,
+					});
 			}}
 			onDragOver={(e) => {
 				console.log("drag over files...");
@@ -37,6 +47,24 @@ const FileInput = ({ handlers }: FileInputProps) => {
 					console.log("ff:", fs);
 					const res = addFiles(fs);
 					console.log(`${res.length} files inputted`);
+					if (createToast) {
+						if (fs.length !== res.length) {
+							createToast({
+								type: "warning",
+								timer: 5000,
+								children: (
+									<div>
+										{res.length}/{fs.length} is found valid
+									</div>
+								),
+							});
+						} else
+							createToast({
+								type: "success",
+								timer: 5000,
+								children: <div>Successfully Uploaded {res.length} files</div>,
+							});
+					}
 				}}
 			/>
 			<div className="border-gray-300 border-2 border-dashed rounded-lg flex flex-col justify-center items-center max-w-sm p-3 text-center">
@@ -49,11 +77,11 @@ const FileInput = ({ handlers }: FileInputProps) => {
 						if (fileInputRef && fileInputRef.current)
 							fileInputRef.current.click();
 					}}
-					className="bg-indigo-500 text-white text-center rounded flex flex-row justify-center items-center px-0 pr-2 py-1 m-2"
+					className="bg-indigo-500 text-white text-center rounded flex flex-row justify-center items-center px-0 m-2"
 					style={{
 						width: "fit-content",
 					}}>
-					<div>
+					<div className="h-100 py-1">
 						<PlusIcon
 							height={"1rem"}
 							width={"2rem"}
@@ -61,7 +89,9 @@ const FileInput = ({ handlers }: FileInputProps) => {
 							stroke="white"
 						/>
 					</div>
-					<div className="font-sm">Add Pages</div>
+					<div className="font-sm mr-2 py-1 pl-2 h-full border-l border-indigo-700">
+						Add Pages
+					</div>
 				</button>
 			</div>
 		</div>

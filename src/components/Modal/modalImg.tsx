@@ -1,24 +1,23 @@
-import { useEffect, useState } from "react";
-import { ModalImgData } from "./inputDataType";
+import { useState, useEffect } from "react";
+import { InputData } from "../inputData.type";
 import {
 	TrashIcon,
+	InformationCircleIcon,
 	PhotoIcon,
 	ChevronLeftIcon,
 	ChevronRightIcon,
-	InformationCircleIcon,
 	XMarkIcon,
 } from "@heroicons/react/24/outline";
 
-// TODO: Generic Model
-export const Modal = (props: { children: React.JSX.Element }) => {
-	return (
-		<div className="fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] w-fit h-fit border rounded-2xl border-color-rose-800 bg-gray-800/90 backdrop-blur-md z-[20] overflow-auto">
-			{props.children}
-		</div>
-	);
-};
+import Modal from "./modal";
 
-interface ModalImgProp {
+export interface ModalImgData {
+	vizState: boolean;
+	data: undefined | InputData;
+	indx: number;
+}
+
+export interface ModalImgProp {
 	moadlImgData: ModalImgData;
 	modalToggle: () => void;
 	setModalViz: (viz: boolean) => void;
@@ -145,7 +144,7 @@ const ModalImg = ({
 											<li>
 												Modified At:{" "}
 												<span className="bg-gray-700 rounded border-b-2 px-2">
-													{new Date().toLocaleString()}
+													{modalImgData.data.lastModified.toLocaleString()}
 												</span>
 											</li>
 											<li>

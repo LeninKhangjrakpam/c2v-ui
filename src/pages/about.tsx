@@ -3,17 +3,15 @@ import FileInput from "../components/fileInput";
 import useFilesInput from "../hooks/useFileInput";
 import ScrollToTopBtn from "../components/scrollToTopBtn";
 import InputImagePreview from "../components/inputImgPreview";
-import CAccordion from "../components/cAccrodion";
+import CAccordion from "../components/Accordion/cAccrodion";
 import GridSortableImg from "../components/grid";
-import { DialogueData } from "../components/inputDataType";
+import { DialogueData } from "../components/inputData.type";
 
 const About: FC = () => {
 	const [inpFiles, setInpFiles, inpFilesHandlers] = useFilesInput();
 	const [panels, setPanels, panelsHandler] = useFilesInput();
 	const [characters, setCharacters, charactersHandler] = useFilesInput();
-	const [dialogues, setDialogues, dialoguesHandler] = useState<DialogueData[]>(
-		[],
-	);
+	const [dialogues, setDialogues] = useState<DialogueData[]>([]);
 
 	return (
 		<div className="relative">
@@ -21,7 +19,6 @@ const About: FC = () => {
 			<h1 className="text-black">Count: {inpFiles.length}</h1>
 
 			{inpFiles.length === 0 && <FileInput handlers={inpFilesHandlers} />}
-
 			{inpFiles.length !== 0 && panels.length === 0 && (
 				<InputImagePreview
 					disabledControl={panels.length !== 0}

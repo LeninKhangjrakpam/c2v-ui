@@ -1,4 +1,5 @@
-import { InputData, ModalImgData } from "../components/inputDataType";
+import { InputData } from "../components/inputData.type";
+import { ModalImgData } from "../components/Modal/modalImg";
 
 export enum ModalImgDataActionKind {
 	toggleViz,

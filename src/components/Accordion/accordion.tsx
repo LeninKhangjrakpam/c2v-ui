@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { ChevronUpIcon } from "@heroicons/react/16/solid";
 
-interface AccordionArg {
+interface AccordionProps {
 	accordionHeader: React.JSX.Element;
 	children: React.JSX.Element;
 	containerClassName?: string;
 	headerClassName?: string;
 }
 
-const Accordion = (props: AccordionArg) => {
+const Accordion = (props: AccordionProps) => {
 	const [viz, setViz] = useState<boolean>(true);
 
 	return (
@@ -26,7 +26,7 @@ const Accordion = (props: AccordionArg) => {
 					<ChevronUpIcon
 						className={`stroke-slate-500 w-10 h-10 ${
 							viz ? "rotate-0" : "rotate-180"
-						} transition-transform duration-400`}
+						} transition duration-400`}
 					/>
 				</button>
 			</div>
@@ -34,8 +34,8 @@ const Accordion = (props: AccordionArg) => {
 			{/* Accordion Body */}
 			<div
 				className={`${
-					viz ? "max-h-fit opacity-100 p-2" : "max-h-0 opacity-0"
-				} transition overflow-hidden`}>
+					viz ? "h-fit p-2" : "h-0"
+				} transition overflow-hidden duration-1000`}>
 				{props.children}
 			</div>
 		</div>

@@ -25,7 +25,7 @@ const ScrollToTopBtn = () => {
 	return (
 		<button
 			className={`rounded-full border border-indigo-700 outline-yellow-300 fixed p-2 m-0 top-[10%] left-[50%] translate-x-[-50%] z-[1] text-sm text-black bg-indigo-300/40 backdrop-blur-md ${
-				scrollBtnViz ? "top-[8%]" : "top-[-18%]"
+				scrollBtnViz ? "top-[8%] opacity-100" : "top-[-100%] opacity-100"
 			} transition-[top] duration-700`}
 			onClick={scrollToTop}>
 			Back to Top
