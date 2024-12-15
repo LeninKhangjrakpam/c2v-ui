@@ -16,7 +16,7 @@ const InputImagePreview = (props: InputImagePreviewProps) => {
 	const createToast = useContext(ToastsContext);
 	return (
 		<>
-			<div className="relative w-full h-fit">
+			<div className="relative w-full h-fit bg-white rounded-lg">
 				<GridSortableImg {...props} />
 				{/* <GridSortableImg
 					disabledControl={props.disabledControl}
@@ -73,7 +73,6 @@ const InputImagePreview = (props: InputImagePreviewProps) => {
 					Generate
 				</button>
 			</div>
-			;
 		</>
 	);
 };

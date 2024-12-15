@@ -106,18 +106,17 @@ export default function Navbar({
 				</DisclosurePanel>
 			</Disclosure>
 
-			<main>
-				<div className="bg-white shadow">
-					<div
-						className="mx-auto max-w-7xl md:px-4 px-1 py-6 sm:px-6 lg:px-8"
-						style={{
-							minHeight: "90dvh",
-						}}>
-						<ToastsContext.Provider value={createToast}>
-							{children}
-						</ToastsContext.Provider>
-					</div>
+			<main className="bg-grid-light">
+				<div
+					className="mx-auto max-w-7xl md:px-4 px-1 py-6 sm:px-6 lg:px-8"
+					style={{
+						minHeight: "90dvh",
+					}}>
+					<ToastsContext.Provider value={createToast}>
+						{children}
+					</ToastsContext.Provider>
 				</div>
+
 				{/* Toasts Outlets */}
 				{toasts.length !== 0 && <ToastContainer toasts={toasts} />}
 			</main>

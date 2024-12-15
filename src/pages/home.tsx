@@ -24,87 +24,99 @@ const Home: FC = () => {
 			<h1 className="text-gray-600 font-roboto pt-1 pb-8 text-2xl font-extrabold">
 				Comic to Video Generation
 			</h1>
-			{inpFiles.length === 0 && <FileInput handlers={inpFilesHandlers} />}
+			{inpFiles.length === 0 && (
+				<div className="bg-white rounded-lg">
+					<FileInput handlers={inpFilesHandlers} />
+				</div>
+			)}
 
 			{inpFiles.length !== 0 && panels.length === 0 && (
-				<InputImagePreview
-					disabledControl={panels.length !== 0}
-					list={inpFiles}
-					setList={setInpFiles}
-					deleteCard={inpFilesHandlers.deleteFile}
-					resetFiles={inpFilesHandlers.clearFiles}
-					swapCard={inpFilesHandlers.swapFile}
-					FileInputFileSrc={inpFilesHandlers.FileInputFileSrc}
-					addFiles={inpFilesHandlers.addFiles}
-					generateHandler={() => setPanels([...inpFiles])}
-				/>
+				<div>
+					<InputImagePreview
+						disabledControl={panels.length !== 0}
+						list={inpFiles}
+						setList={setInpFiles}
+						deleteCard={inpFilesHandlers.deleteFile}
+						resetFiles={inpFilesHandlers.clearFiles}
+						swapCard={inpFilesHandlers.swapFile}
+						FileInputFileSrc={inpFilesHandlers.FileInputFileSrc}
+						addFiles={inpFilesHandlers.addFiles}
+						generateHandler={() => setPanels([...inpFiles])}
+					/>
+				</div>
 			)}
 
 			{panels.length !== 0 && (
-				<CAccordion
-					disabledControl={true}
-					accordionTitleText={`Image Selection ${characters.length} images`}
-					resetHandler={inpFilesHandlers.clearFiles}
-					addListHandler={inpFilesHandlers.addFiles}
-					FileInputFileSrc={inpFilesHandlers.FileInputFileSrc}
-					generateHandler={() => {}}
-					gridComponent={
-						<GridSortableImg
-							disabledControl={true}
-							list={inpFiles}
-							setList={setInpFiles}
-							deleteCard={inpFilesHandlers.deleteFile}
-							swapCard={inpFilesHandlers.swapFile}
-						/>
-					}
-				/>
+				<div className="bg-white rounded-lg">
+					<CAccordion
+						disabledControl={true}
+						accordionTitleText={`Image Selection ${characters.length} images`}
+						resetHandler={inpFilesHandlers.clearFiles}
+						addListHandler={inpFilesHandlers.addFiles}
+						FileInputFileSrc={inpFilesHandlers.FileInputFileSrc}
+						generateHandler={() => {}}
+						gridComponent={
+							<GridSortableImg
+								disabledControl={true}
+								list={inpFiles}
+								setList={setInpFiles}
+								deleteCard={inpFilesHandlers.deleteFile}
+								swapCard={inpFilesHandlers.swapFile}
+							/>
+						}
+					/>
+				</div>
 			)}
 
 			{panels.length !== 0 && (
-				<CAccordion
-					disabledControl={characters.length !== 0}
-					accordionTitleText={`Panels Selection ${panels.length} panels`}
-					resetHandler={panelsHandler.clearFiles}
-					addListHandler={panelsHandler.addFiles}
-					FileInputFileSrc={panelsHandler.FileInputFileSrc}
-					generateHandler={() => setCharacters([...panels])}
-					gridComponent={
-						<GridSortableImg
-							disabledControl={characters.length !== 0}
-							list={panels}
-							setList={setPanels}
-							deleteCard={panelsHandler.deleteFile}
-							swapCard={panelsHandler.swapFile}
-						/>
-					}
-				/>
+				<div className="bg-white rounded-lg">
+					<CAccordion
+						disabledControl={characters.length !== 0}
+						accordionTitleText={`Panels Selection ${panels.length} panels`}
+						resetHandler={panelsHandler.clearFiles}
+						addListHandler={panelsHandler.addFiles}
+						FileInputFileSrc={panelsHandler.FileInputFileSrc}
+						generateHandler={() => setCharacters([...panels])}
+						gridComponent={
+							<GridSortableImg
+								disabledControl={characters.length !== 0}
+								list={panels}
+								setList={setPanels}
+								deleteCard={panelsHandler.deleteFile}
+								swapCard={panelsHandler.swapFile}
+							/>
+						}
+					/>
+				</div>
 			)}
 
 			{characters.length !== 0 && (
-				<CAccordion
-					disabledControl={dialogues.length !== 0}
-					accordionTitleText={`Characters Selection ${characters.length} characters`}
-					resetHandler={charactersHandler.clearFiles}
-					addListHandler={charactersHandler.addFiles}
-					FileInputFileSrc={charactersHandler.FileInputFileSrc}
-					generateHandler={() =>
-						setDialogues(
-							characters.map((d) => ({
-								id: Math.floor(Math.random() * 99999),
-								text: d.name,
-							})),
-						)
-					}
-					gridComponent={
-						<GridSortableImg
-							disabledControl={dialogues.length !== 0}
-							list={characters}
-							setList={setCharacters}
-							deleteCard={charactersHandler.deleteFile}
-							swapCard={charactersHandler.swapFile}
-						/>
-					}
-				/>
+				<div className="bg-white rounded-lg">
+					<CAccordion
+						disabledControl={dialogues.length !== 0}
+						accordionTitleText={`Characters Selection ${characters.length} characters`}
+						resetHandler={charactersHandler.clearFiles}
+						addListHandler={charactersHandler.addFiles}
+						FileInputFileSrc={charactersHandler.FileInputFileSrc}
+						generateHandler={() =>
+							setDialogues(
+								characters.map((d) => ({
+									id: Math.floor(Math.random() * 99999),
+									text: d.name,
+								})),
+							)
+						}
+						gridComponent={
+							<GridSortableImg
+								disabledControl={dialogues.length !== 0}
+								list={characters}
+								setList={setCharacters}
+								deleteCard={charactersHandler.deleteFile}
+								swapCard={charactersHandler.swapFile}
+							/>
+						}
+					/>
+				</div>
 			)}
 
 			{dialogues.length !== 0 && (
