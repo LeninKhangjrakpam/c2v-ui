@@ -9,23 +9,18 @@ interface InputImagePreviewProps extends GridSortableProps<InputData> {
 	addFiles: (fs: File[]) => InputData[];
 	FileInputFileSrc: (e: React.ChangeEvent<HTMLInputElement>) => File[];
 	generateHandler: () => void; // Handler for submitting or generating assets
+	isGenerateButtonLoading: boolean;
 }
 
 const InputImagePreview = (props: InputImagePreviewProps) => {
 	const addFilesInputRef = useRef<HTMLInputElement>(null);
 	const createToast = useContext(ToastsContext);
+
 	return (
 		<>
 			<div className="relative w-full h-fit bg-white rounded-lg">
-				<GridSortableImg {...props} />
-				{/* <GridSortableImg
-					disabledControl={props.disabledControl}
-					list={props.list}
-					setList={props.setList}
-					modalDataSetter={props.modalDataSetter}
-					deleteCard={props.deleteCard}
-					swapCard={props.swapCard}
-				/> */}
+				<GridSortableImg {...props} disabledControl={props.disabledControl} />
+
 				{/* Reset */}
 				<button
 					title="Reset Panels selection"
@@ -63,14 +58,16 @@ const InputImagePreview = (props: InputImagePreviewProps) => {
 			{/* Buttons */}
 			<div className="flex flex-row w-full justify-center gap-2">
 				<button
+					disabled={props.disabledControl}
 					onClick={props.resetFiles}
-					className="rounded-md w-32 bg-gray-600 hover:bg-slate-500 text-white text-xl px-4 py-2">
+					className="rounded-md w-34 bg-gray-600 hover:bg-slate-500 text-white text-xl px-4 py-2">
 					Reset
 				</button>
 				<button
+					disabled={props.disabledControl}
 					onClick={props.generateHandler}
-					className="rounded-md w-32 bg-gray-600 hover:bg-slate-500 text-white text-xl px-4 py-2">
-					Generate
+					className={`rounded-md w-34 bg-gray-600 hover:bg-slate-500 text-white text-xl px-4 py-2`}>
+					{props.isGenerateButtonLoading ? "Generating" : "Generate"}
 				</button>
 			</div>
 		</>

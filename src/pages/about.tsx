@@ -3,9 +3,10 @@ import FileInput from "../components/fileInput";
 import useFilesInput from "../hooks/useFileInput";
 import ScrollToTopBtn from "../components/scrollToTopBtn";
 import InputImagePreview from "../components/inputImgPreview";
-import CAccordion from "../components/Accordion/cAccrodion";
+import CAccordion from "../components/Accordion/PageAccordion";
 import GridSortableImg from "../components/grid";
 import { DialogueData } from "../components/inputData.type";
+import { fileInputFileSrc } from "../utils/formUtils";
 
 const About: FC = () => {
 	const [inpFiles, setInpFiles, inpFilesHandlers] = useFilesInput();
@@ -27,8 +28,9 @@ const About: FC = () => {
 					deleteCard={inpFilesHandlers.deleteFile}
 					resetFiles={inpFilesHandlers.clearFiles}
 					swapCard={inpFilesHandlers.swapFile}
-					FileInputFileSrc={inpFilesHandlers.FileInputFileSrc}
+					FileInputFileSrc={fileInputFileSrc}
 					addFiles={inpFilesHandlers.addFiles}
+					isGenerateButtonLoading={false}
 					generateHandler={() => setPanels([...inpFiles])}
 				/>
 			)}
@@ -39,7 +41,6 @@ const About: FC = () => {
 					accordionTitleText={`Image Selection ${characters.length} images`}
 					resetHandler={inpFilesHandlers.clearFiles}
 					addListHandler={inpFilesHandlers.addFiles}
-					FileInputFileSrc={inpFilesHandlers.FileInputFileSrc}
 					generateHandler={() => {}}
 					gridComponent={
 						<GridSortableImg
@@ -59,7 +60,6 @@ const About: FC = () => {
 					accordionTitleText={`Panels Selection ${panels.length} panels`}
 					resetHandler={panelsHandler.clearFiles}
 					addListHandler={panelsHandler.addFiles}
-					FileInputFileSrc={panelsHandler.FileInputFileSrc}
 					generateHandler={() => setCharacters([...panels])}
 					gridComponent={
 						<GridSortableImg
@@ -79,7 +79,6 @@ const About: FC = () => {
 					accordionTitleText={`Characters Selection ${characters.length} characters`}
 					resetHandler={charactersHandler.clearFiles}
 					addListHandler={charactersHandler.addFiles}
-					FileInputFileSrc={charactersHandler.FileInputFileSrc}
 					generateHandler={() =>
 						setDialogues(
 							characters.map((d) => ({

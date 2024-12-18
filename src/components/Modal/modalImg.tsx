@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import Modal from "./modal";
+import { sizeHumanizer } from "../../utils/util";
 
 export interface ModalImgData {
 	vizState: boolean;
@@ -18,6 +19,7 @@ export interface ModalImgData {
 }
 
 export interface ModalImgProp {
+	disabledControl: boolean;
 	moadlImgData: ModalImgData;
 	modalToggle: () => void;
 	setModalViz: (viz: boolean) => void;
@@ -28,6 +30,7 @@ export interface ModalImgProp {
 
 const ModalImg = ({
 	moadlImgData: modalImgData,
+	disabledControl,
 	modalToggle,
 	setModalViz,
 	updateModalDataWithPrev,
@@ -38,6 +41,10 @@ const ModalImg = ({
 
 	const keyEvnt = (e: globalThis.KeyboardEvent) => {
 		if (e.key === "Escape" || e.key === "Cancel") setModalViz(false);
+		if (e.key === "ArrowRight" && updateModalDataWithNext)
+			updateModalDataWithNext();
+		if (e.key === "ArrowLeft" && updateModalDataWithPrev)
+			updateModalDataWithPrev();
 	};
 
 	useEffect(() => {
@@ -59,38 +66,42 @@ const ModalImg = ({
 								/>
 								{/* Image Functions */}
 								<div className="absolute rounded-md left-[50%] bottom-0 translate-x-[-50%] bg-gray-800 flex flex-row items-center justify-center backdrop-blur-sm border">
-									{deleteHandler && (
-										<div
-											className="bg-none p-2 w-10 h-10 flex items-center justify-center border-r hover:scale-[1.05] transition-transform"
-											onClick={deleteHandler}>
-											<button
-												className="border-none bg-[transparent] w-fit-content h-fit-content p-2"
-												title="delete page">
-												<TrashIcon className="w-6 h-6 stroke-white" />
-											</button>
-										</div>
+									{!disabledControl && (
+										<>
+											{deleteHandler && (
+												<div
+													className="bg-none p-2 w-10 h-10 flex items-center justify-center border-r hover:scale-[1.05] transition-transform"
+													onClick={deleteHandler}>
+													<button
+														className="border-none bg-[transparent] w-fit-content h-fit-content p-2"
+														title="delete page">
+														<TrashIcon className="w-6 h-6 stroke-white" />
+													</button>
+												</div>
+											)}
+											<div className="bg-none  p-2 w-10 h-10 flex items-center justify-center border-r hover:scale-[1.05] transition-transform">
+												<button
+													className="border-none bg-[transparent] w-fit-content h-fit-content p-2"
+													title="Rotate Image Left">
+													<PhotoIcon className="w-6 h-6 stroke-white" />
+												</button>
+											</div>
+											<div className="bg-none p-2 w-10 h-10 flex items-center justify-center border-r hover:scale-[1.05] transition-transform">
+												<button
+													className="border-none bg-[transparent] w-fit-content h-fit-content p-2"
+													title="Rotate Image Right">
+													<PhotoIcon className="w-6 h-6 stroke-white" />
+												</button>
+											</div>
+											<div className="bg-none p-2 w-10 h-10 flex items-center justify-center hover:scale-[1.05] transition-transform">
+												<button
+													className="border-none bg-[transparent] w-fit-content h-fit-content p-2"
+													title="Flip Vertically">
+													<PhotoIcon className="w-6 h-6 stroke-white" />
+												</button>
+											</div>
+										</>
 									)}
-									<div className="bg-none  p-2 w-10 h-10 flex items-center justify-center border-r hover:scale-[1.05] transition-transform">
-										<button
-											className="border-none bg-[transparent] w-fit-content h-fit-content p-2"
-											title="Rotate Image Left">
-											<PhotoIcon className="w-6 h-6 stroke-white" />
-										</button>
-									</div>
-									<div className="bg-none p-2 w-10 h-10 flex items-center justify-center border-r hover:scale-[1.05] transition-transform">
-										<button
-											className="border-none bg-[transparent] w-fit-content h-fit-content p-2"
-											title="Rotate Image Right">
-											<PhotoIcon className="w-6 h-6 stroke-white" />
-										</button>
-									</div>
-									<div className="bg-none p-2 w-10 h-10 flex items-center justify-center hover:scale-[1.05] transition-transform">
-										<button
-											className="border-none bg-[transparent] w-fit-content h-fit-content p-2"
-											title="Flip Vertically">
-											<PhotoIcon className="w-6 h-6 stroke-white" />
-										</button>
-									</div>
 									{/* Dynamic on screen size */}
 									<div className="md:hidden bg-none p-2 w-10 h-10 flex items-center justify-center border-l scale-1  hover:scale-[1.05] transition-transform">
 										<button
@@ -150,7 +161,7 @@ const ModalImg = ({
 											<li>
 												Size:{" "}
 												<span className="bg-gray-700 rounded border-b-2 px-2">
-													{modalImgData.data.size}
+													{sizeHumanizer(modalImgData.data.size)}
 												</span>
 											</li>
 											<li>
@@ -211,7 +222,7 @@ const ModalImg = ({
 										<li>
 											Size:{" "}
 											<span className="bg-gray-700 rounded border-b-2 px-2">
-												{modalImgData.data.size}
+												{sizeHumanizer(modalImgData.data.size)}
 											</span>
 										</li>
 										<li>

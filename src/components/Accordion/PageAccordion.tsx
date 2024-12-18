@@ -2,13 +2,13 @@ import { useRef } from "react";
 import { InputData } from "../inputData.type";
 import Accordion from "./accordion";
 import { XMarkIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { fileInputFileSrc } from "../../utils/formUtils";
 
 interface CAccordionProps {
 	accordionTitleText: string;
 	gridComponent: React.JSX.Element;
 	resetHandler: () => void;
 	addListHandler: (fs: File[]) => InputData[];
-	FileInputFileSrc: (e: React.ChangeEvent<HTMLInputElement>) => File[];
 	generateHandler: () => void;
 	disabledControl: boolean;
 }
@@ -57,9 +57,7 @@ const CAccordion = (props: CAccordionProps) => {
 								multiple
 								accept="image/*"
 								className="hidden"
-								onChange={(e) =>
-									props.addListHandler(props.FileInputFileSrc(e))
-								}
+								onChange={(e) => props.addListHandler(fileInputFileSrc(e))}
 							/>
 						</>
 					)}
