@@ -9,7 +9,7 @@ import FileInput from "../components/fileInput";
 import useFilesInput from "../hooks/useFileInput";
 import ScrollToTopBtn from "../components/scrollToTopBtn";
 import InputImagePreview from "../components/inputImgPreview";
-import CAccordion from "../components/Accordion/PageAccordion";
+import PageAccordion from "../components/Accordion/PageAccordion";
 import GridSortableImg from "../components/grid";
 import useFetcher from "../hooks/useFetcher";
 import usePanelData from "../hooks/usePanelData";
@@ -87,22 +87,20 @@ const Home: FC = () => {
 
 			{panels.length !== 0 && (
 				<div className="bg-white rounded-lg">
-					<CAccordion
+					<PageAccordion
 						disabledControl={true}
 						accordionTitleText={`Image Selection ${inpFiles.length} images`}
 						resetHandler={inpFilesHandlers.clearFiles}
 						addListHandler={inpFilesHandlers.addFiles}
-						generateHandler={() => {}}
-						gridComponent={
-							<GridSortableImg
-								disabledControl={true}
-								list={inpFiles}
-								setList={setInpFiles}
-								deleteCard={inpFilesHandlers.deleteFile}
-								swapCard={inpFilesHandlers.swapFile}
-							/>
-						}
-					/>
+						generateHandler={() => {}}>
+						<GridSortableImg
+							disabledControl={true}
+							list={inpFiles}
+							setList={setInpFiles}
+							deleteCard={inpFilesHandlers.deleteFile}
+							swapCard={inpFilesHandlers.swapFile}
+						/>
+					</PageAccordion>
 				</div>
 			)}
 

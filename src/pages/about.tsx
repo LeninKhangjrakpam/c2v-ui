@@ -3,7 +3,7 @@ import FileInput from "../components/fileInput";
 import useFilesInput from "../hooks/useFileInput";
 import ScrollToTopBtn from "../components/scrollToTopBtn";
 import InputImagePreview from "../components/inputImgPreview";
-import CAccordion from "../components/Accordion/PageAccordion";
+import PageAccordion from "../components/Accordion/PageAccordion";
 import GridSortableImg from "../components/grid";
 import { DialogueData } from "../components/inputData.type";
 import { fileInputFileSrc } from "../utils/formUtils";
@@ -36,45 +36,41 @@ const About: FC = () => {
 			)}
 
 			{panels.length !== 0 && (
-				<CAccordion
+				<PageAccordion
 					disabledControl={true}
 					accordionTitleText={`Image Selection ${characters.length} images`}
 					resetHandler={inpFilesHandlers.clearFiles}
 					addListHandler={inpFilesHandlers.addFiles}
-					generateHandler={() => {}}
-					gridComponent={
-						<GridSortableImg
-							disabledControl={true}
-							list={inpFiles}
-							setList={setInpFiles}
-							deleteCard={inpFilesHandlers.deleteFile}
-							swapCard={inpFilesHandlers.swapFile}
-						/>
-					}
-				/>
+					generateHandler={() => {}}>
+					<GridSortableImg
+						disabledControl={true}
+						list={inpFiles}
+						setList={setInpFiles}
+						deleteCard={inpFilesHandlers.deleteFile}
+						swapCard={inpFilesHandlers.swapFile}
+					/>
+				</PageAccordion>
 			)}
 
 			{panels.length !== 0 && (
-				<CAccordion
+				<PageAccordion
 					disabledControl={characters.length !== 0}
 					accordionTitleText={`Panels Selection ${panels.length} panels`}
 					resetHandler={panelsHandler.clearFiles}
 					addListHandler={panelsHandler.addFiles}
-					generateHandler={() => setCharacters([...panels])}
-					gridComponent={
-						<GridSortableImg
-							disabledControl={characters.length !== 0}
-							list={panels}
-							setList={setPanels}
-							deleteCard={panelsHandler.deleteFile}
-							swapCard={panelsHandler.swapFile}
-						/>
-					}
-				/>
+					generateHandler={() => setCharacters([...panels])}>
+					<GridSortableImg
+						disabledControl={characters.length !== 0}
+						list={panels}
+						setList={setPanels}
+						deleteCard={panelsHandler.deleteFile}
+						swapCard={panelsHandler.swapFile}
+					/>
+				</PageAccordion>
 			)}
 
 			{characters.length !== 0 && (
-				<CAccordion
+				<PageAccordion
 					disabledControl={dialogues.length !== 0}
 					accordionTitleText={`Characters Selection ${characters.length} characters`}
 					resetHandler={charactersHandler.clearFiles}
@@ -86,17 +82,15 @@ const About: FC = () => {
 								text: d.name,
 							})),
 						)
-					}
-					gridComponent={
-						<GridSortableImg
-							disabledControl={dialogues.length !== 0}
-							list={characters}
-							setList={setCharacters}
-							deleteCard={charactersHandler.deleteFile}
-							swapCard={charactersHandler.swapFile}
-						/>
-					}
-				/>
+					}>
+					<GridSortableImg
+						disabledControl={dialogues.length !== 0}
+						list={characters}
+						setList={setCharacters}
+						deleteCard={charactersHandler.deleteFile}
+						swapCard={charactersHandler.swapFile}
+					/>
+				</PageAccordion>
 			)}
 
 			{dialogues.length !== 0 && (

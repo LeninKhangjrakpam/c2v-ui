@@ -17,13 +17,13 @@ export const imageUploadHandler = (
 ) => {
 	const data = new FormData();
 	// Add inpFiles to formData
-	inpFiles.forEach((inpFile) => data.append("pages", inpFile.file));
+	inpFiles.forEach((inpFile) => data.append("files", inpFile.file));
 	uploadPageFetcher._fetch(apiStore("uploadPage").href, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/form",
 		},
-		body: JSON.stringify(data),
+		body: data,
 	});
 };
 
