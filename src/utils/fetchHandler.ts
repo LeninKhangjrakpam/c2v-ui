@@ -17,12 +17,11 @@ export const imageUploadHandler = (
 ) => {
 	const data = new FormData();
 	// Add inpFiles to formData
-	inpFiles.forEach((inpFile) => data.append("files", inpFile.file));
+	inpFiles.forEach((inpFile) =>
+		data.append("files", inpFile.file, inpFile.name),
+	);
 	uploadPageFetcher._fetch(apiStore("uploadPage").href, {
 		method: "POST",
-		headers: {
-			"Content-Type": "application/form",
-		},
 		body: data,
 	});
 };
@@ -50,9 +49,10 @@ export const imageUploadPostHandler = (
 ) => {
 	// Update InpFiles with pages return from server
 	inpFilesHandlers.clearFiles();
-	const mimeTye = "image/jpeg";
 	const resFiles: File[] = [];
 	res.images.forEach((d) => {
+		const fExt = d.filename.split(".").pop();
+		const mimeTye = `image/${fExt}`;
 		const blb = b64ToBlob(d.blob, mimeTye);
 		const f = blobToFile(blb, d.filename, mimeTye, Date.now());
 		resFiles.push(f);
@@ -95,11 +95,12 @@ export const panelGenPostHandler = (
 	panelsHandlers: PanelDataHandler,
 ) => {
 	panelsHandlers.resetPanel();
-	const mimeTye = "image/jpeg";
 
 	for (const pFileNames in res) {
 		const ps = res[pFileNames];
 		const panelData = ps?.map((p) => {
+			const fExt = p.filename.split(".").pop();
+			const mimeTye = `image/${fExt}`;
 			const blb = b64ToBlob(p.blob, mimeTye);
 			return blobToFile(blb, p.filename, mimeTye, Date.now());
 		});
@@ -130,11 +131,12 @@ export const assetGenPostHandler = (
 	speechBHandler: PanelDataHandler,
 ) => {
 	speechBHandler.resetPanel();
-	const mimeTye = "image/jpeg";
 
 	for (const pFileNames in res) {
 		const sb = res[pFileNames];
 		const sbData = sb?.map((p) => {
+			const fExt = p.filename.split(".").pop();
+			const mimeTye = `image/${fExt}`;
 			const blb = b64ToBlob(p.blob, mimeTye);
 			return blobToFile(blb, p.filename, mimeTye, Date.now());
 		});
