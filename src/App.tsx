@@ -1,11 +1,11 @@
-import { BrowserRouter, Routes, Route } from "react-router";
+import { HashRouter, Routes, Route } from "react-router";
 import "./index.css";
 import Layout from "./layout";
 import RoutePaths from "./routes";
 
 function App() {
 	return (
-		<BrowserRouter>
+		<HashRouter>
 			<Routes>
 				<Route path="/" element={<Layout />}>
 					{RoutePaths.map((route, i) => (
@@ -13,7 +13,7 @@ function App() {
 					))}
 				</Route>
 			</Routes>
-		</BrowserRouter>
+		</HashRouter>
 	);
 }
 
