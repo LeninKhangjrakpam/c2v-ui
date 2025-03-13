@@ -8,6 +8,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import ToastsContext from "../hooks/createToastContext";
 import ToastContainer from "./Toast/toastContainer";
 import useToast from "../hooks/useToast";
+import Mark from "../assets/mark.svg";
 
 const navigation = [
 	{ name: "Home", href: "/" },
@@ -37,11 +38,7 @@ export default function Navbar({
 							className="flex items-center justify-between w-100 relative"
 							style={{ width: "100%" }}>
 							<div className="shrink-0 flex items-center gap-2">
-								<img
-									alt="Comic2Video"
-									src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
-									className="size-8"
-								/>
+								<img alt="Comic2Video" src={Mark} className="size-8" />
 								<div className="text-xl font-bold">Comic2Video</div>
 							</div>
 							<div className="hidden md:block relative">
