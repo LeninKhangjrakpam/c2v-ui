@@ -113,6 +113,7 @@ const GridSortableImg = (props: GridSortableProps<InputData>) => {
 			{/* Image Modal */}
 			{modalImgData.vizState && modalImgData.data && (
 				<ModalImg
+					disabledControl={props.disabledControl}
 					moadlImgData={modalImgData}
 					modalToggle={() =>
 						dispatchModalImgData({

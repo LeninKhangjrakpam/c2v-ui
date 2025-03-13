@@ -4,13 +4,14 @@ import { FileInputHandler } from "../hooks/useFileInput";
 import { PlusIcon, FolderPlusIcon } from "@heroicons/react/24/outline";
 import ToastsContext from "../hooks/createToastContext";
 import { ToastTimer } from "../utils/constants";
+import { fileDropFileSrc, fileInputFileSrc } from "../utils/formUtils";
 
 interface FileInputProps {
 	handlers: FileInputHandler;
 }
 
 const FileInput = ({ handlers }: FileInputProps) => {
-	const { addFiles, FileDropFileSrc, FileInputFileSrc } = handlers;
+	const { addFiles } = handlers;
 
 	const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -19,7 +20,7 @@ const FileInput = ({ handlers }: FileInputProps) => {
 	return (
 		<div
 			onDrop={(e) => {
-				const fs = FileDropFileSrc(e);
+				const fs = fileDropFileSrc(e);
 				const res = addFiles(fs);
 				console.log(`${res.length} files dropped`);
 				// TODO: notify the user of dropped files count using a `toast`
@@ -43,7 +44,7 @@ const FileInput = ({ handlers }: FileInputProps) => {
 				accept="image/*"
 				className="hidden"
 				onChange={(e) => {
-					const fs = FileInputFileSrc(e);
+					const fs = fileInputFileSrc(e);
 					console.log("ff:", fs);
 					const res = addFiles(fs);
 					console.log(`${res.length} files inputted`);

@@ -41,4 +41,58 @@ export const isAccptImg = (type: string): boolean => {
 	return /image\/.*/.test(type);
 };
 
-// TODO: Move FileDropFileSrc, FileInputFileSrc, filterImgFiles here
+export const b64ToBlob = (
+	blob: string,
+	type: string,
+	chunkSize: number = 512,
+): Blob => {
+	const byteCharacters = atob(blob);
+	const byteArrays = [];
+
+	for (let offset = 0; offset < byteCharacters.length; offset += chunkSize) {
+		const slice = byteCharacters.slice(offset, offset + chunkSize);
+
+		const byteNumbers = new Array(slice.length);
+		for (let i = 0; i < slice.length; i++) {
+			byteNumbers[i] = slice.charCodeAt(i);
+		}
+
+		const byteArray = new Uint8Array(byteNumbers);
+		byteArrays.push(byteArray);
+	}
+
+	return new Blob(byteArrays, { type });
+};
+
+export const blobToFile = (
+	blob: Blob,
+	fileName: string,
+	type: string,
+	lastMod?: number,
+): File => {
+	return new File([blob], fileName, {
+		type,
+		lastModified: lastMod ?? Date.now(),
+	});
+};
+
+/**
+ *
+ * @param size in bytes
+ * @param precision no of trailing decimal place
+ * @returns a string by converting the byte to readable size unit
+ */
+export const sizeHumanizer = (
+	size: number,
+	precision: number = 100,
+): string => {
+	const units = ["B", "KB", "MB", "GB", "TB", "PB"];
+
+	let unitIndx = 0;
+	while (size >= 2 ** 10 && unitIndx < units.length - 1) {
+		unitIndx++;
+		size /= 2 ** 10;
+	}
+	size = Math.floor(size * precision) / precision;
+	return `${size} ${units[unitIndx]}`;
+};

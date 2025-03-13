@@ -1,0 +1,66 @@
+[
+    "-framerate", "1",
+    "-pattern_type", "glob",
+    "-i", "img*.png",
+    "-c:v", "libx264", 
+    "-r", "30",
+    "-pix_fmt", "yuv420p",
+    "-vf", "pad=ceil(iw/2)*2:ceil(ih/2)*2",
+    "out.mp4"
+]
+////////////////
+[
+    "-i", "img1.jpg",
+    "-i", "img2.jpg",
+    "-i", "img3.jpg",
+    "-i", "img4.jpg",
+    "-filter_complex",
+    "[0:v]scale=426:240:force_original_aspect_ratio=decrease,pad=426:240:-1:-1:color=black,trim=0:2,setpts=PTS-STARTPTS[v1];[1:v]scale=426:240:force_original_aspect_ratio=decrease,pad=426:240:-1:-1:color=black,trim=0:3,setpts=PTS-STARTPTS+2/TB[v2];[2:v]scale=426:240:force_original_aspect_ratio=decrease,pad=426:240:-1:-1:color=black,trim=0:3,setpts=PTS-STARTPTS+5/TB[v3];[3:v]scale=426:240:force_original_aspect_ratio=decrease,pad=426:240:-1:-1:color=black,trim=0:3,setpts=PTS-STARTPTS+3/TB[v4];[v1][v2]overlay=shortest=1[temp1];[temp1][v4]overlay=shortest=1[temp2];[temp2][v3]overlay=shortest=1",
+    "-t", "8",
+    "-c:v", "libx264",
+    "-pix_fmt", "yuv420p",
+    "-movflags", "+faststart",
+    "output.mp4"
+]
+
+///////////////
+"""
+filename start stop: 
+1.png 0 3, 
+2.png 3 6, 
+3.png 6 10, 
+4.png 4 8, 
+5.png 13 18
+
+audio filename start stop trim-start trim-end: 
+a1.mp3 0 8 0 8, 
+a2.mp3 8 14 0 6, 
+a3.mp3 14 19 0 5, 
+a4.mp3 17 20 0 3
+
+"""
+ffmpeg -y \
+  -f lavfi -t 20 -i color=c=black:s=426x240:r=30 \
+  -loop 1 -t 3 -i 1.png \
+  -loop 1 -t 3 -i 2.png \
+  -loop 1 -t 4 -i 3.png \
+  -loop 1 -t 5 -i 4.png \
+  -loop 1 -t 5 -i 5.jpg \
+  -i t1.mp3 -i t2.mp3 -i t3.mp3 -i t4.mp3 \
+  -filter_complex "\
+  [1]scale=426:240:force_original_aspect_ratio=decrease,pad=426:240:(ow-iw)/2:(oh-ih)/2,setsar=1[i1]; \
+  [2]scale=426:240:force_original_aspect_ratio=decrease,pad=426:240:(ow-iw)/2:(oh-ih)/2,setsar=1[i2]; \
+  [3]scale=426:240:force_original_aspect_ratio=decrease,pad=426:240:(ow-iw)/2:(oh-ih)/2,setsar=1[i3]; \
+  [4]scale=426:240:force_original_aspect_ratio=decrease,pad=426:240:(ow-iw)/2:(oh-ih)/2,setsar=1[i4]; \
+  [5]scale=426:240:force_original_aspect_ratio=decrease,pad=426:240:(ow-iw)/2:(oh-ih)/2,setsar=1[i5]; \
+  [0][i1]overlay=enable='between(t,0,3)'[v1]; \
+  [v1][i2]overlay=enable='between(t,3,6)'[v2]; \
+  [v2][i3]overlay=enable='between(t,6,10)'[v3]; \
+  [v3][i4]overlay=enable='between(t,4,8)'[v4]; \
+  [v4][i5]overlay=enable='between(t,13,18)'[v]; \
+  [6]atrim=start=0:end=8,adelay=0|0[a1_trimmed]; \
+  [7]atrim=start=0:end=6,adelay=8000|8000[a2_trimmed]; \
+  [8]atrim=start=0:end=5,adelay=14000|14000[a3_trimmed]; \
+  [9]atrim=start=0:end=3,adelay=17000|17000[a4_trimmed]; \
+  [a1_trimmed][a2_trimmed][a3_trimmed][a4_trimmed]amix=inputs=4:duration=first:dropout_transition=3[a]" \
+  -map "[v]" -map "[a]" -c:v libx264 -c:a aac -pix_fmt yuva420p -r 30 -t 20 output2.mp4

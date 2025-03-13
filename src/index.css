@@ -10,6 +10,8 @@
 	color: rgba(255, 255, 255, 0.87);
 	background-color: #242424;
 
+	interpolate-size: allow-keyword;
+
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
@@ -25,6 +27,7 @@
 	.bg-grid-light {
 		background-color: theme(backgroundColor.white);
 		background-repeat: no-repeat;
+		background-attachment: fixed;
 		background-image: repeating-linear-gradient(
 				0deg,
 				transparent 0 19px,
@@ -37,6 +40,7 @@
 	.bg-grid-dark {
 		background-color: theme(backgroundColor.black);
 		background-repeat: no-repeat;
+		background-attachment: fixed;
 		background-image: repeating-linear-gradient(
 				0deg,
 				transparent 0 19px,
