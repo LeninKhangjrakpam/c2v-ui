@@ -49,7 +49,7 @@ export interface AudioTrackI {
 
 export interface CaptionTrackI {
 	name: string;
-	url: string;
+	content: string; // serialised caption data
 }
 
 export type VidSettingType = {

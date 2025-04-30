@@ -1,0 +1,28 @@
+* {
+    interpolate-size: allow-keywords;
+}
+
+.item {
+    transform-origin: top;
+}
+
+.item-enter {
+    /* opacity: 0; */
+    height: 0;
+}
+
+.item-enter-active {
+    /* opacity: 1; */
+    height: fit-content;
+    transition: height 300ms ease-in;
+}
+
+.item-exit {
+    height: fit-content;
+}
+
+.item-exit-active {
+    /* opacity: 0; */
+    height: 0;
+    transition: height 300ms ease-in;
+}

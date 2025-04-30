@@ -1,0 +1,124 @@
+1
+00:00:01,000 --> 00:00:04,000
+Good morning, everyone. 
+Welcome to today's lecture on Artificial Intelligence.
+
+2
+00:00:04,500 --> 00:00:07,500
+Now, as you can see on the slide, AI is defined as the simulation of human intelligence.
+
+3
+00:00:08,000 --> 00:00:11,500
+<b>Artificial intelligence</b> involves machines learning from data and improving over time.
+
+4
+00:00:11,800 --> 00:00:14,000
+Let’s take a look at some real-world applications of AI.
+
+5
+00:00:14,500 --> 00:00:16,000
+For example, in healthcare, AI is used for diagnostics.
+
+6
+00:00:16,500 --> 00:00:18,500
+AI also powers virtual assistants, like Siri or Alexa.
+
+7
+00:00:19,000 --> 00:00:21,000
+Can anyone think of other applications of AI?
+
+8
+00:00:21,500 --> 00:00:24,000
+(Brief pause) Yes, autonomous vehicles. Good example!
+
+9
+00:00:24,500 --> 00:00:26,500
+Now, let's dive deeper into machine learning, which is a subset of AI.
+
+10
+00:00:27,000 --> 00:00:30,000
+In machine learning, algorithms are trained on large datasets to make predictions.
+
+11
+00:00:30,500 --> 00:00:32,500
+For example, predicting customer behavior in e-commerce.
+
+12
+00:00:33,000 --> 00:00:35,000
+Now, there are three types of machine learning: supervised, unsupervised, and reinforcement learning.
+
+13
+00:00:35,500 --> 00:00:37,000
+Let’s break them down one by one.
+
+14
+00:00:37,500 --> 00:00:40,000
+Supervised learning is where the model is trained on labeled data.
+
+15
+00:00:40,500 --> 00:00:42,500
+Unsupervised learning works with unlabeled data, looking for patterns.
+
+16
+00:00:43,000 --> 00:00:45,000
+And reinforcement learning involves agents learning from rewards and penalties.
+
+17
+00:00:45,500 --> 00:00:47,500
+Any questions so far?
+
+18
+00:00:48,000 --> 00:00:51,000
+(Students raising hands, pause) Yes, John, go ahead.
+
+19
+00:00:51,500 --> 00:00:53,500
+John: Could you explain reinforcement learning again?
+
+20
+00:00:54,000 --> 00:00:56,500
+Sure! In reinforcement learning, agents interact with an environment and learn through feedback.
+
+21
+00:00:57,000 --> 00:01:00,000
+For example, teaching a robot to play chess by rewarding good moves.
+
+22
+00:01:00,500 --> 00:01:02,500
+Alright, let’s move on to neural networks.
+
+23
+00:01:03,000 --> 00:01:05,000
+Neural networks are inspired by the human brain.
+
+24
+00:01:05,500 --> 00:01:08,000
+They consist of layers of nodes, or “neurons,” that process information.
+
+25
+00:01:08,500 --> 00:01:11,500
+Each neuron in a layer is connected to neurons in the previous and next layers.
+
+26
+00:01:12,000 --> 00:01:14,000
+Any questions on neural networks so far?
+
+27
+00:01:14,500 --> 00:01:16,000
+(No response from students) Okay, let's continue.
+
+28
+00:01:16,500 --> 00:01:19,000
+We’ll cover deep learning next, which is a specialized type of neural network.
+
+29
+00:01:19,500 --> 00:01:21,500
+Deep learning has been key to advancements in AI.
+
+30
+00:01:22,000 --> 00:01:25,000
+(Closing the slide) That's all for today. Any final questions before we end the lecture?
+
+31
+00:01:25,500 --> 00:01:27,000
+(Students talking among themselves) Alright, thanks for your attention!
