@@ -1,11 +1,18 @@
 export const apiBaseUrl = "http://127.0.0.1:8000";
 
-type apiService = "uploadPage" | "genPanels" | "genAssets" | "recogniseText";
+type apiService =
+	| "uploadPage"
+	| "genPanels"
+	| "genAssets"
+	| "recogniseText"
+	| "uploadPageForCharacter";
 
 export const apiStore = (service: apiService): URL => {
 	switch (service) {
 		case "uploadPage":
 			return new URL("uploadPages", apiBaseUrl);
+		case "uploadPageForCharacter":
+			return new URL("uploadPagesCharacter", apiBaseUrl);
 		case "genPanels":
 			return new URL("generatePanels", apiBaseUrl);
 		case "genAssets":

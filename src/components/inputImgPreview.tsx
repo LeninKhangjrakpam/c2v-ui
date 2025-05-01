@@ -1,8 +1,9 @@
 import { XMarkIcon, PlusIcon } from "@heroicons/react/24/outline";
 import GridSortableImg, { GridSortableProps } from "./grid";
 import { InputData } from "./inputData.type";
-import { useContext, useRef } from "react";
+import React, { useContext, useRef } from "react";
 import ToastsContext from "../hooks/createToastContext";
+import { GenerationMode } from "../pages/home/home";
 
 interface InputImagePreviewProps extends GridSortableProps<InputData> {
 	resetFiles: () => void;
@@ -10,6 +11,8 @@ interface InputImagePreviewProps extends GridSortableProps<InputData> {
 	FileInputFileSrc: (e: React.ChangeEvent<HTMLInputElement>) => File[];
 	generateHandler: () => void; // Handler for submitting or generating assets
 	isGenerateButtonLoading: boolean;
+	generationMode: GenerationMode;
+	setGenerationMode: React.Dispatch<React.SetStateAction<GenerationMode>>;
 }
 
 const InputImagePreview = (props: InputImagePreviewProps) => {
@@ -56,6 +59,17 @@ const InputImagePreview = (props: InputImagePreviewProps) => {
 				/>
 			</div>
 			{/* Buttons */}
+			<div className="w-full text-center my-2 text-xl">
+				<select
+					className="text-gray-100 bg-gray-600 font-roboto p-1 rounded-md  px-4 py-2"
+					onChange={(e) =>
+						props.setGenerationMode(e.target.value as GenerationMode)
+					}
+					value={props.generationMode}>
+					<option value="characterGen">Character Generation</option>
+					<option value="fullGen">Full Generation</option>
+				</select>
+			</div>
 			<div className="flex flex-row w-full justify-center gap-2">
 				<button
 					disabled={props.disabledControl}

@@ -26,6 +26,21 @@ export const imageUploadHandler = (
 	});
 };
 
+export const imageUploadCharacterHandler = (
+	inpFiles: InputData[],
+	uploadPageFetcher: useFetcherResult<UploadPageResponse>,
+) => {
+	const data = new FormData();
+	// Add inpFiles to formData
+	inpFiles.forEach((inpFile) =>
+		data.append("files", inpFile.file, inpFile.name),
+	);
+	uploadPageFetcher._fetch(apiStore("uploadPageForCharacter").href, {
+		method: "POST",
+		body: data,
+	});
+};
+
 export const panelGenHandler = (
 	pageFileName: string[],
 	genPanelFetcher: useFetcherResult<GenPanelResponse>,
