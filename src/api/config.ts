@@ -12,7 +12,7 @@ export const apiStore = (service: apiService): URL => {
 		case "uploadPage":
 			return new URL("uploadPages", apiBaseUrl);
 		case "uploadPageForCharacter":
-			return new URL("uploadPagesCharacter", apiBaseUrl);
+			return new URL("generateComicShot", apiBaseUrl);
 		case "genPanels":
 			return new URL("generatePanels", apiBaseUrl);
 		case "genAssets":
